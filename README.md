@@ -4,7 +4,7 @@
 
 [下载地址](https://github.com/nonPointer/BJUT_nCoV_Report/releases)
 
-# 使用方式
+## 使用方式
 
 1. 创建 `account.txt`，格式为（不包含方括号）
     ```text
@@ -14,3 +14,16 @@
 2. 修改 `main.py` 内的经纬度和地址信息（可选)
 3. 安装所需依赖：`pip3 install -r requirements.txt`
 4. 执行 `main.py`
+
+## 自动化
+
+### Linux：使用 Crontab
+
+每天早晨 8 点上报
+```shell script
+0 8 * * * python3 main.py
+```
+
+### Windows：使用计划任务（Task Scheduler）
+
+务必选中 `Run whether user is logged on or not`。

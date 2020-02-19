@@ -2,6 +2,8 @@
 
 基于 Python3 的适用于北工大的 nCoV 自动填报脚本
 
+[下载地址](https://github.com/nonPointer/BJUT_nCoV_Report/releases)
+
 # 使用方式
 
 1. 创建 `account.txt`，格式为（不包含方括号）

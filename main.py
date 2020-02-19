@@ -5,7 +5,13 @@ import requests
 
 if __name__ == '__main__':
 	# load config
-	f = open('account.txt')
+	try:
+		f = open('account.txt')
+	except:
+		print('account.txt not found!')
+		time.sleep(3)
+		exit()
+
 	username = f.readline().strip()
 	password = f.readline().strip()
 

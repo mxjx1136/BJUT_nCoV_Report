@@ -34,6 +34,7 @@ if __name__ == '__main__':
 	# report
 	data = {
 		'ismoved': '0',
+		'dqjzzt': '1',  # 当前居住状态，0在校、1在京不在校
 		'jhfjrq': '',  # 计划返京日期
 		'jhfjjtgj': '',  # 计划返京交通工具
 		'jhfjhbcc': '',  # 计划返京航班车次

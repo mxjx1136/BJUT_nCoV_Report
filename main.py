@@ -1,6 +1,7 @@
+# coding=utf-8
 import json
 import time
-
+import datetime
 import requests
 
 if __name__ == '__main__':
@@ -19,6 +20,8 @@ if __name__ == '__main__':
 	s = requests.session()
 	headers = {
 	}
+	f = open('log.txt','a')
+	curr_time = datetime.datetime.now()
 
 	# login
 	data = {
@@ -26,7 +29,9 @@ if __name__ == '__main__':
 		'password': password
 	}
 	r = s.post('https://itsapp.bjut.edu.cn/uc/wap/login/check', data=data, headers=headers)
-	print('【登录】' + json.loads(r.text)['m'])
+	tmp = '【登录】' + json.loads(r.text)['m']
+	print(tmp)
+	f.write('\n'+curr_time.strftime("%Y-%m-%d-%H:%M:%S")+tmp)
 	if not '成功' in r.text:
 		time.sleep(3)
 		exit()
@@ -103,5 +108,8 @@ if __name__ == '__main__':
 		'jcjg': '' # 检查结果
 	}
 	r = s.post('https://itsapp.bjut.edu.cn/ncov/wap/default/save', data=data, headers=headers)
-	print('【上报】' + json.loads(r.text)['m'])
+	tmp = '【上报】' + json.loads(r.text)['m']
+	print(tmp)
+	f.write('\n'+curr_time.strftime("%Y-%m-%d-%H:%M:%S")+tmp)
+	f.close()
 	time.sleep(3)

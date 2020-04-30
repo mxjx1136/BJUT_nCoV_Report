@@ -35,16 +35,16 @@ if __name__ == '__main__':
 			'location': coordination
 		}
 		r = requests.get(url='https://restapi.amap.com/v3/geocode/regeo', params=PARAMS)
-		f = open('account.txt', "w")
-		location = r.json()
-		location['lng'] = lng
-		location['lat'] = lat
-		f.write(username + '\n' + password + '\n' + json.dumps(location, ensure_ascii=False))
-		f.close()
 		try:
 			print(r.json()['regeocode']['formatted_address'])
 			print('10 秒钟后继续')
 			time.sleep(10)
+			f = open('account.txt', "w")
+			location = r.json()
+			location['lng'] = lng
+			location['lat'] = lat
+			f.write(username + '\n' + password + '\n' + json.dumps(location, ensure_ascii=False))
+			f.close()
 		except:
 			print('生成地址时遇到问题')
 			exit('程序已经中断')
@@ -60,16 +60,18 @@ if __name__ == '__main__':
 	log = open('log.txt', 'a')
 	curr_time = datetime.datetime.now()
 
+	print('【登录】正在尝试使用 Cookie 登录')
 	try:
 		with open('cookie.txt', 'rb') as f:
 			s.cookies.update(pickle.load(f))
 	except:
 		print('cookie.txt not found!')
 		# login
+		print('模拟登录…')
 		data = {'username': username, 'password': password}
 		r = s.post('https://itsapp.bjut.edu.cn/uc/wap/login/check',
 				   data=data, headers=headers)
-		tmp = '【登录】' + json.loads(r.text)['m']
+		tmp = r.json()['m']
 		print(tmp)
 		log.write('\n' + curr_time.strftime('%Y-%m-%d-%H:%M:%S') + tmp)
 		if not '成功' in r.text:
@@ -142,6 +144,6 @@ if __name__ == '__main__':
 	log.close()
 	r.raise_for_status()
 	print(r.status_code)
-	if (r.status_code != 200) or (str(r.json()['e']) != '0'):
+	if r.status_code != 200:
 		print('failed')
 		os.remove('cookie.txt')

@@ -113,7 +113,6 @@ if __name__ == '__main__':
 			'type': 'complete',
 			'info': 'SUCCESS',
 			'status': 1,
-			'Eia': 'jsonp_' + str(random.randint(100000, 999999)) + '_',
 			'position': {
 				'O': lng,
 				'P': lat,
@@ -121,8 +120,8 @@ if __name__ == '__main__':
 				'lat': lat
 			},
 			'message': 'Get geolocation success.Convert Success.Get address success.',
-			'location_type': 'ip',
-			'accuracy': None,
+			'location_type': 'html5',
+			'accuracy': 65,
 			'isConverted': True,
 			'addressComponent': location['regeocode']['addressComponent'],
 			'formatted_address': location['regeocode']['formatted_address'],
@@ -131,7 +130,7 @@ if __name__ == '__main__':
 			'pois': [],
 		}, ensure_ascii=False),
 		'area': '北京市  ' + location['regeocode']['addressComponent']['district'],
-		'province': location['regeocode']['addressComponent']['province'],
+		'province': '北京市',
 		'city': '北京市',
 		'sfzx': '0',  # 是否已经返校
 		'sfjcwhry': '0',  # 是否接触武汉人员
@@ -215,7 +214,9 @@ if __name__ == '__main__':
 		log.close()
 		r.raise_for_status()
 		if r.status_code != 200:
-			print('failed')
+			err = 'Err: Login failed!'
+			print(err)
+			notification(err)
 			os.remove('cookie.txt')
 
 		if str(r.json()['e']) == '0':

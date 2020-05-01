@@ -19,9 +19,9 @@
 
 ### Linux：使用 Crontab
 
-每天早晨 8 点上报
+每天早晨 8:00 上报并在 8:01、9:00、9:01 重试。
 ```shell script
-0 8 * * * python3 main.py
+0,1 8,9 * * * python3 main.py
 ```
 
 ### Windows：使用计划任务（Task Scheduler）

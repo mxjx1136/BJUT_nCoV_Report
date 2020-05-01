@@ -121,7 +121,7 @@ if __name__ == '__main__':
 			},
 			'message': 'Get geolocation success.Convert Success.Get address success.',
 			'location_type': 'html5',
-			'accuracy': 65,
+			'accuracy': random.randint(10, 100),
 			'isConverted': True,
 			'addressComponent': location['regeocode']['addressComponent'],
 			'formatted_address': location['regeocode']['formatted_address'],

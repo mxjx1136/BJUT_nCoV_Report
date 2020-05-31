@@ -88,6 +88,13 @@ if __name__ == '__main__':
 
 	# previous data
 	r = s.get('https://itsapp.bjut.edu.cn/ncov/wap/default')
+	if r.history:
+		print("Cookie expired")
+		os.remove('cookie.txt')
+		exit()
+	else:
+		print("Cookie not expired")
+
 	default = r.text[r.text.find('var def = ') + 10:]
 	default = json.loads(default[:default.find(';')])
 	oldInfo = r.text[r.text.find('oldInfo: ') + 9:]

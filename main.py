@@ -42,7 +42,7 @@ if __name__ == '__main__':
 			's': 'rsv3',
 			'location': coordination
 		}
-		r = requests.get(url='https://restapi.amap.com/v3/geocode/regeo', params=PARAMS)
+		r = requests.get(url='http://pubinfo.sdwcvc.cn/xxtb2/saveRecord', params=PARAMS)
 		f = open('account.txt', "w")
 		location = r.json()
 		location['lng'] = lng
@@ -75,7 +75,7 @@ if __name__ == '__main__':
 		print('cookie.txt not found!')
 		# login
 		data = {'username': username, 'password': password}
-		r = s.post('https://itsapp.bjut.edu.cn/uc/wap/login/check',
+		r = s.post('http://pubinfo.sdwcvc.cn/xxtb2/saveRecord',
 		           data=data, headers=headers)
 		tmp = '【登录】' + r.json()['m']
 		print(tmp)
@@ -87,7 +87,7 @@ if __name__ == '__main__':
 			pickle.dump(s.cookies, f)
 
 	# previous data
-	r = s.get('https://itsapp.bjut.edu.cn/ncov/wap/default')
+	r = s.get('http://pubinfo.sdwcvc.cn/xxtb2/saveRecord')
 	if r.history:
 		print("Cookie expired")
 		os.remove('cookie.txt')
@@ -213,7 +213,7 @@ if __name__ == '__main__':
 			print(warn)
 
 	if go_on:
-		r = s.post('https://itsapp.bjut.edu.cn/ncov/wap/default/save',
+		r = s.post('http://pubinfo.sdwcvc.cn/xxtb2/saveRecord',
 		           data=data, headers=headers)
 		tmp = '【上报】' + json.loads(r.text)['m']
 		print(tmp)
